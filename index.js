@@ -1,14 +1,35 @@
-var http = require('http');
-var cadastro = require('./myRegister');
-var login = require('./login');
-var home = require ('./home');
-var consultas = require ('./consultas');
+const http = require('http');
+const cadastro = require('./myRegister');
+const login = require('./login');
+const home = require('./home');
+const consultas = require('./consultas');
 
-http.createServer(function (req, res) {
+http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.write("Home: " + home.home() + "<br>");
-  res.write("Cadastre-se: " + cadastro.myRegister() + "<br>");
-  res.write("Login: " + login.login() + "<br>");
-  res.write("Consultas: " + consultas.consultas());
+  res.write('<link rel="stylesheet" type="text/css" href="styles.css">');
+  res.write('<body>');
+  res.write('<div class="container">');
+  res.write('<h1>Home:</h1>');
+  res.write(`<div class="section">${home.home()}</div>`);
+  res.write('<h1>Cadastre-se:</h1>');
+  res.write(`<div class="section">${cadastro.myRegister()}</div>`);
+  res.write('<h1>Login:</h1>');
+  res.write(`<div class="section">${login.login()}</div>`);
+  res.write('<h1>Consultas:</h1>');
+  res.write(`<div class="section">${consultas.consultas()}</div>`);
+  res.write('</div>'); 
+  res.write('<style>');
+  res.write('/* Reset de estilos para garantir consistência entre navegadores */');
+  res.write('body, h1, p {');
+  res.write('  margin: 0;');
+  res.write('  padding: 0;');
+  res.write('}');
+  res.write('body {');
+  res.write('  font-family: Arial, sans-serif;');
+  res.write('  background-color: #f0f0f0;');
+  res.write('  color: #333;');
+  res.write('  padding: 20px;');
+  res.write('}');
+  res.write('</body>');
   res.end();
 }).listen(5015);
